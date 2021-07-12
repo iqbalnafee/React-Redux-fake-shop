@@ -1,7 +1,8 @@
 import React,{useEffect}  from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import ProductComponent from './ProductComponent';
 import axios from 'axios';
+import { setProducts } from '../redux/actions/productActions';
 
 const ProductListing = () => {
 
@@ -17,16 +18,27 @@ const ProductListing = () => {
     // const products = useSelector(state => state);
     // console.log(products);
 
+    const products = useSelector(state => state);
+
+    const dispatch = useDispatch();
+
     const fetchProducts = async () => {
         const response = await axios.get('https://fakestoreapi.com/products')
                                         .catch(err => {
                                             console.log(err);
                                         });
+                                        
+        //Now we need to add this data to our redux store. Hence we will call our setProducts action and then this action will dispatch this action to the reducer
+
+        //FLOW: action->dispatch to reducer
+        dispatch(setProducts(response.data));
 
     }
     useEffect(() => {
         fetchProducts();
     },[]);
+
+    console.log(products);
 
     return (
         <div className="ui grid container">
