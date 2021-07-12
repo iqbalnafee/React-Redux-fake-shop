@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 
+
 const ProductComponent = () => {
     const products = useSelector(state => state.allproducts.products);
     const {id,title,category} = products[0];
