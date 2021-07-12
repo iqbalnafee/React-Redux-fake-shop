@@ -24,3 +24,11 @@ export const selectedProduct = (product) => {
 
     }
 }
+
+export const removeSelectedProduct = () => {
+    return {
+
+        type:ActionTypes.REMOVE_SELECTED_PRODUCT,
+
+    }
+}
